@@ -1,0 +1,66 @@
+.trigger,
+.content {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  border: .15rem solid #d8e6f2;
+  border-radius: .8rem;
+  width: 6rem;
+  padding: .5rem;
+  user-select: none;
+}
+
+.trigger {
+  line-height: 100%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.trigger[data-state='open'] {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  padding-bottom: calc(.5rem + .15rem);
+}
+
+.content {
+  display: flex;
+  gap: .2rem;
+  padding: .1rem .1rem .2rem .1rem;
+
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  transform: translateY(-.22rem);
+}
+
+.item {
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 .4rem;
+  height: 2rem;
+  border-radius: .6rem;
+}
+.item:focus {
+  outline: none;
+  background-color: #98cced72;
+}
+
+.itemText {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  gap: .4rem;
+}
+
+.indicator {
+  content: "对";
+}
+
+.separate {
+  height: .12rem;
+  width: 90%;
+  background-color: #d8e6f2;
+}

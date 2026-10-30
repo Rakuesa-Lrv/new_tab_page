@@ -1,0 +1,35 @@
+:root {
+  --line-color: #d8e6f2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input,
+button {
+  border: none;
+  background-color: transparent;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: none;
+}
+
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
+label:has(
+  >input[type='button'],
+  >input[type='rest'],
+  >input[type='submit']
+) {
+  cursor: pointer;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
