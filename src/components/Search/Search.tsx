@@ -10,6 +10,9 @@ const Search = ()=> {
       className={classes.search}
     >
       <Select />
+      {/* <hr 
+        className={classes.hr}
+      /> */}
       <Input />
     </div>
   )

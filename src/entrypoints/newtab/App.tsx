@@ -1,8 +1,11 @@
+import Background from "@/components/Background";
 import Search from "@/components/Search/Search";
 
 const App = ()=> {
   return (
-    <Search />
+    <Background>
+      <Search />
+    </Background>
   )
 }
 

@@ -3,7 +3,7 @@ import classes from './Select.module.css';
 import { Fragment } from 'react/jsx-runtime';
 
 import { Select as Slct } from 'radix-ui';
-import { ChevronDownIcon, CheckIcon } from '@radix-ui/react-icons';
+import { ChevronDownIcon, TriangleLeftIcon } from '@radix-ui/react-icons';
 
 import { engineOptions, type engine } from '@/utils/search';
 
@@ -30,6 +30,7 @@ const Select = ()=> {
       }}
     >
       <Slct.Trigger
+        title='切换搜索引擎'
         className={classes.trigger}
       >
         <Slct.Value />
@@ -44,10 +45,11 @@ const Select = ()=> {
         >
           {engineOptions.map((item, idx)=> (
             <Fragment key={item.value}>
-              { <Slct.Separator className={classes.separate} />}
+              { idx>0 && <Slct.Separator className={classes.separate} />}
               <Slct.Item
                 className={classes.item}
                 value={item.value}
+                title={item.label}
               >
                 <Slct.ItemText>
                   <p className={classes.itemText}>
@@ -55,8 +57,8 @@ const Select = ()=> {
                     <span> {item.label} </span>
                   </p>
                 </Slct.ItemText>
-                <Slct.ItemIndicator asChild>
-                  <CheckIcon />
+                <Slct.ItemIndicator>
+                  <TriangleLeftIcon />
                 </Slct.ItemIndicator>
               </Slct.Item>
             </Fragment>
