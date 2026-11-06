@@ -1,0 +1,89 @@
+:root {
+  --shadow: #697c8c7f;
+  --focus: #5487b79a;
+}
+
+.navigator {
+  /* width: 70%; */
+  height: fit-content;
+  display: grid;
+
+  position: absolute;
+  bottom: 20vh;
+  place-items: center;
+
+  gap: 2rem;
+}
+
+.navGrid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .2rem;
+  height: 6rem;
+  aspect-ratio: 1/1;
+  padding: .6rem;
+  border-radius: .4rem;
+
+  background-color: #d2e6f67f;
+
+  color: #1c3041d2;
+  text-decoration: none;
+  text-align: center;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+
+  cursor: pointer;
+  user-select: none;
+
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+}
+
+.navGrid:focus {
+  outline: none;
+}
+.navGrid:hover,
+.navGrid:focus {
+  /* outline: #5487b79a solid .1rem; */
+  box-shadow: 
+    -1px 0px 2px var(--focus),
+    1px 0px 2px var(--focus),
+    0px -1px 2px var(--focus),
+    0px 1px 2px var(--focus);
+  filter: brightness(.9);
+  transform: scale(1.1);
+}
+
+
+.navGrid>* {
+  min-width: 0;
+}
+.navGrid>p {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navGrid>.icon{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  aspect-ratio: 1/1;
+}
+.navGrid>.icon>* {
+  height: 75%;
+  aspect-ratio: 1/1;
+}
+
+.operator {
+  
+}

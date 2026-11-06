@@ -1,6 +1,6 @@
 import classes from './Input.module.css';
 
-import { searchUrl } from '@/utils/search';
+import { searchUrl } from '@/utils/searchEngine';
 
 import useStoreField from '@/hooks/useStoreField';
 import useSearchStore from '@/hooks/useSearchStore';

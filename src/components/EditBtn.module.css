@@ -1,0 +1,23 @@
+.edit {
+  position: absolute;
+  bottom: .4rem;
+  right: .4rem;
+
+  width: fit-content;
+  height: 1.4rem;
+  background-color: #d3e3fd;
+  border-radius: 999rem;
+  padding: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: .6rem;
+  font-size: .8rem;
+
+  box-shadow: 
+    2px 2px 2px #697c8c7f;
+}
+
+.edit:hover {
+  filter: brightness(.92);
+}

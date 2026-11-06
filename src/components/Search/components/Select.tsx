@@ -5,7 +5,7 @@ import { Fragment } from 'react/jsx-runtime';
 import { Select as Slct } from 'radix-ui';
 import { ChevronDownIcon, TriangleLeftIcon } from '@radix-ui/react-icons';
 
-import { engineOptions, type engine } from '@/utils/search';
+import { engineOptions, type engine } from '@/utils/searchEngine';
 
 import useConfigStore from '@/hooks/useConfigStore';
 import useStoreField from '@/hooks/useStoreField';
@@ -35,7 +35,7 @@ const Select = ()=> {
       >
         <Slct.Value />
         <Slct.Icon asChild>
-          <ChevronDownIcon />
+          <ChevronDownIcon className={classes.chevronDown} />
         </Slct.Icon>
       </Slct.Trigger>
       <Slct.Portal>
@@ -53,7 +53,7 @@ const Select = ()=> {
               >
                 <Slct.ItemText>
                   <p className={classes.itemText}>
-                    <img src={item.icon} alt={item.label} />
+                    <img src={item.icon} alt={item.label} className={classes.itemIcon} />
                     <span> {item.label} </span>
                   </p>
                 </Slct.ItemText>

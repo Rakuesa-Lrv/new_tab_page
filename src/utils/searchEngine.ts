@@ -1,8 +1,14 @@
 import baiduIcon from '@/assets/baidu-color.svg';
 import bingIcon from '@/assets/bing-color.svg';
 import google from '@/assets/google-color.svg';
+import duckduckgo from '@/assets/duckduckgo.svg'
 
-const engineC = ['baidu', 'Microsoft Bing', 'Google'] as const;
+const engineC = [
+  'baidu', 
+  'Microsoft Bing', 
+  'Google',
+  'DuckDuckGo',
+] as const;
 export type engine = typeof engineC[number]
 
 interface engineInfo {
@@ -26,6 +32,11 @@ const engineMap = {
     label: '谷歌',
     icon: google,
     baseUrl: 'https://www.google.com/search?q=${query}',
+  },
+  'DuckDuckGo': {
+    label: '鸭鸭',
+    icon: duckduckgo,
+    baseUrl: 'https://duckduckgo.com/?q=${query}'
   },
 } as Record<engine, engineInfo>
 

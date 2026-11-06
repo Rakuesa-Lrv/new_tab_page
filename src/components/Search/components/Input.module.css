@@ -1,3 +1,8 @@
+:root {
+  --shadow: #697c8c7f;
+  --focus: #5487b79a;
+}
+
 .input {
   height: 100%;
   padding: 0 1rem;
@@ -7,17 +12,31 @@
   border-left: none;
   flex-grow: 1;
   font-size: .9rem;
+  color: #1c3041d2;
   background-color: #d2e6f67f;
   border-radius: 999rem;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 
   box-shadow: 
-    2px 0px 2px #697c8c7f,
-    0px 2px 2px #697c8c7f,
-    0px -2px 2px #697c8c7f;
+    2px 0px 2px var(--shadow),
+    0px 2px 2px var(--shadow),
+    0px -2px 2px var(--shadow);
 }
 
 .input::selection {
-  background-color: #f7f4f988;
+  background-color: #f2e6fa9e;
+}
+
+.input:focus {
+  box-shadow: 
+    2px 0px 2px var(--focus),
+    0px 2px 2px var(--focus),
+    0px -2px 2px var(--focus);
+}
+.input:focus~* {
+  box-shadow: 
+    -2px 0px 2px var(--focus),
+    0px 2px 2px var(--focus),
+    0px -2px 2px var(--focus);
 }

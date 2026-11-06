@@ -8,12 +8,12 @@ const Search = ()=> {
   return (
     <div
       className={classes.search}
+      style={{
+        top: `33vh`,
+      }}
     >
-      <Select />
-      {/* <hr 
-        className={classes.hr}
-      /> */}
       <Input />
+      <Select />
     </div>
   )
 }
