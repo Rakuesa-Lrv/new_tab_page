@@ -125,7 +125,7 @@ const Navigator = ({
         <NavGrid {...item} />
       ))}
       {linkList.length<columns*rows && 
-        <a
+        <div
           className={classes.navGrid}
         >
           <div
@@ -136,7 +136,7 @@ const Navigator = ({
             alt='添加快捷方式' />
           </div>
           <p>添加快捷方式</p>
-        </a>
+        </div>
       }
     </div>
   )
