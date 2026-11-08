@@ -1,31 +1,41 @@
 import { create } from "zustand";
 import { combine } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import type { Shortcut } from "./useConfigStore";
 
-type action = 
-| 'close'
-| 'open'
-;
+const actC = ['close', 'open'] as const;
+type display = typeof actC[number];
 
-interface State {
-  showAdd: boolean,
-}
+const displayItemC = ['add', 'update', 'delete'] as const;
+type act = typeof displayItemC[number];
+
+type CapDisplayItem = Capitalize<act>;
+
+type show = `show${CapDisplayItem}`
+
+type State = Record<show, boolean> & { tar: Shortcut['id'] };
+
+type Action = { display: display, act: act, tar?: Shortcut['id'] }
 
 const useDisplayStore = create(immer(combine(
   {
     showAdd: false,
+    showUpdate: false,
+    tar: '',
   } as State,
   (set)=> ({
-    changeAdd: (action: action)=> {
+    dispatch: (action: Action)=> {
       set(draft=> {
-        switch(action) {
+        const show = `show${action.act.replace(/^./, f=>f.toUpperCase())}` as show;
+        switch(action.display) {
           case "close":
-            draft.showAdd&&= false;
+            draft[show] &&= false;
             break;
           case "open":
-            draft.showAdd||= true;
+            draft[show] ||= true;
             break;
         }
+        draft.tar = action.tar ?? '';
       })
     },
   })

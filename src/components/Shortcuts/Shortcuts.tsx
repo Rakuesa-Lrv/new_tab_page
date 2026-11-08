@@ -7,6 +7,7 @@ import useStoreField from '@/hooks/useStoreField';
 import useDisplayStore from '@/hooks/useDisplayStore';
 
 import AddForm from './components/AddForm';
+import UpdateForm from './components/UpdateForm';
 import ShortcutItem from './components/ShortcutItem';
 
 const linkList = [
@@ -80,9 +81,10 @@ const Shortcuts = ({
   columns = 6,
   rows = 2,
 }: Props)=> {
-  const { showAdd, changeAdd } = useStoreField(useDisplayStore, [
+  const { showAdd, showUpdate, showDelete } = useStoreField(useDisplayStore, [
     'showAdd',
-    'changeAdd'
+    'showUpdate',
+    'showDelete',
   ])
 
   const { shortCutList } = useStoreField(useConfigStore, [
@@ -92,7 +94,8 @@ const Shortcuts = ({
   return (
     <>
 
-    {showAdd && <AddForm />}
+    { showAdd && <AddForm /> }
+    { showUpdate && <UpdateForm /> }
 
     <div
       className={classes.navigator}
@@ -102,12 +105,13 @@ const Shortcuts = ({
       }}
     >
       {shortCutList.map((item)=>(
-        <ShortcutItem {...item} key={item.id}/>
+        <ShortcutItem {...item} key={item.id} tar={item.id} />
       ))}
       {linkList.length<columns*rows && (
         <ShortcutItem 
+          tar='_ZN_add_shortcut'
           isAdd
-          url='#' 
+          url='' 
           iconUrl={plusIcon} 
           name='添加快捷方式'
         />

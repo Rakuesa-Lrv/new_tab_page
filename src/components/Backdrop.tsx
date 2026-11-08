@@ -5,21 +5,27 @@ import { createPortal } from 'react-dom';
 const backdrop = document.querySelector('#backdrop')!;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  onClose: ()=>void,
+  option?: {
+    onClose: ()=>void,
+  }
 }
 
 const Backdrop = ({
   children,
-  onClose,
+  option,
 }: Props)=> {
   return (createPortal((
     <div
       className={classes.backdrop}
-      onPointerUp={(e)=> {
-        e.currentTarget===e.target && (()=> {
-          onClose();
-        })();
-      }}
+      onPointerUp={
+        option
+        ? ((e)=> {
+          e.currentTarget===e.target && (()=> {
+            option.onClose();
+          })();
+        })
+        : undefined
+      }
     >
       {children}
     </div>

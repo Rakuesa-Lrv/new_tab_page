@@ -8,7 +8,11 @@ export default defineConfig({
   manifest: {
     permissions: [
       'storage',
-      'unlimitedStorage'
+      'unlimitedStorage',
+      'favicon'
     ],
-  }
+    host_permissions: [
+      '<all_urls>'
+    ]
+  },
 });

@@ -1,12 +1,14 @@
 import classes from './ShortcutItem.module.css';
 
 import globeIcon from '@/assets/globe.svg';
+import { TextAlignJustifyIcon ,TrashIcon, Pencil1Icon } from '@radix-ui/react-icons';
 
 import useConfigStore, { type Shortcut } from '@/hooks/useConfigStore';
 import useDisplayStore from '@/hooks/useDisplayStore';
 import useStoreField from '@/hooks/useStoreField';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement>, Omit<Shortcut, 'id'> {
+  tar: Shortcut['id'],
   isAdd?: boolean,
 };
 
@@ -14,18 +16,23 @@ const ShortcutItem = ({
   url,
   iconUrl,
   name,
-  isAdd
+  tar,
+  isAdd,
 }: Props)=> {
-  const { changeAdd } = useStoreField(useDisplayStore, ['changeAdd']);
+  const { dispatch } = useStoreField(useDisplayStore, [
+    'dispatch'
+  ]);
 
   return (
-    <a
-      href={url}
+    <div
       className={classes.item}
       onClick={
         isAdd
-        ? (()=> {changeAdd('open')})
-        : ((e)=> {e.preventDefault()})
+        ? (()=> {dispatch({ display: 'open', act: 'add' })})
+        : ((e)=> {
+          e.preventDefault();
+          URL.canParse(url) && (location.href = url);
+        })
       }
     >
       <div
@@ -45,12 +52,16 @@ const ShortcutItem = ({
       </p>
       {isAdd || (
         <div
-          className={classes.operator}
+          className={classes.more}
+          onClick={(e)=> {
+            e.stopPropagation();
+            dispatch({ display: 'open', act: 'update', tar: tar });
+          }}
         >
-
+          <TextAlignJustifyIcon />
         </div>
       )}
-    </a>
+    </div>
   )
 }
 

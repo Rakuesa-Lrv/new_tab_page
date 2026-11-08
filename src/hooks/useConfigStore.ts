@@ -38,25 +38,25 @@ const useConfigStore = create(persist(immer(combine(
     changeShortcut: (action: changeShortcutAction)=> {
       set(draft=> {
         switch(action.type) {
-          case "PUSH":
+          case "PUSH": {
             draft.shortCutList.push({
               ...action.shortcut, 
               id: crypto.randomUUID(),
             })
             break;
-          case "UPDATE":
-            const cs = draft.shortCutList;
-            cs.forEach(item=> {
-              item.id===action.shortcut.id && (()=>{
-                item = { ...action.shortcut }
-              })();
-            })
+          }
+          case "UPDATE": {
+            const sc = draft.shortCutList;
+            const idx = sc.findIndex(item=> item.id===action.shortcut.id);
+            draft.shortCutList[idx] = {...action.shortcut};
             break;
-          case "REMOVE":
+          }
+          case "REMOVE": {
             const sc = draft.shortCutList;
             const idx = sc.findIndex(item=> item.id===action.id);
             draft.shortCutList.splice(idx, 1);
             break;
+          }
         }
       })
     }
