@@ -8,10 +8,11 @@ import useConfigStore from '@/hooks/useConfigStore';
 
 const Input = ()=> {
 
-  const { defaultSearchEngine: defEngine } = useStoreField(useConfigStore, ['defaultSearchEngine']);
+  const { defaultEngine } = useStoreField(useConfigStore, [
+    'defaultEngine'
+  ]);
 
-  const { engine, query, setQuery } = useStoreField(useSearchStore, [
-    'engine',
+  const { query, setQuery } = useStoreField(useSearchStore, [
     'query',
     'setQuery',
   ])
@@ -20,10 +21,11 @@ const Input = ()=> {
     <input
       className={classes.input}
       placeholder='搜索'
+      value={query}
       onKeyDown={(e)=> {
         const key = e.key;
         key==='Enter' && (()=> {
-          const url = searchUrl(engine ?? defEngine, query);
+          const url = searchUrl(defaultEngine, query);
           location.href = url;
         })();
       }}

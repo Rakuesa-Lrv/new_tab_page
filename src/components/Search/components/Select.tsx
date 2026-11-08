@@ -13,20 +13,16 @@ import useSearchStore from '@/hooks/useSearchStore';
 
 
 const Select = ()=> {
-  const { defaultSearchEngine: defEngine } = useStoreField(useConfigStore, [
-    'defaultSearchEngine'
-  ])
-
-  const { engine, setEngine } = useStoreField(useSearchStore, [
-    'engine', 
+  const { defaultEngine, setEngine } = useStoreField(useConfigStore, [
+    'defaultEngine',
     'setEngine'
   ])
 
   return (
     <Slct.Root
-      value={engine ?? defEngine}
+      value={defaultEngine}
       onValueChange={(value)=> {
-        setEngine(value as engine)
+        setEngine(value as engine);
       }}
     >
       <Slct.Trigger

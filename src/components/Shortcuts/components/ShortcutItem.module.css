@@ -3,19 +3,7 @@
   --focus: #5487b79a;
 }
 
-.navigator {
-  /* width: 70%; */
-  height: fit-content;
-  display: grid;
-
-  position: absolute;
-  bottom: 20vh;
-  place-items: center;
-
-  gap: 2rem;
-}
-
-.navGrid {
+.item {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,45 +32,50 @@
     2px 0px 2px var(--shadow),
     0px -2px 2px var(--shadow),
     0px 2px 2px var(--shadow);
+  backdrop-filter: blur(1px);
 
   transition: all .2s;
-  
 }
 
-.navGrid:focus {
+.item:focus {
   outline: none;
 }
-.navGrid:hover,
-.navGrid:focus {
+.item:hover,
+.item:focus-visible {
   /* outline: #5487b79a solid .1rem; */
   box-shadow: 
     -1px 0px 2px var(--focus),
     1px 0px 2px var(--focus),
     0px -1px 2px var(--focus),
     0px 1px 2px var(--focus);
-  filter: brightness(.9);
+  background-color: #cadfeec0;
   transform: scale(1.1);
 }
 
 
-.navGrid>* {
+.item>* {
   min-width: 0;
 }
-.navGrid>p {
+.item>.name {
   width: 100%;
+  height: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  user-select: none;
 }
 
-.navGrid>.icon{
+.item>.icon{
   display: inline-flex;
   justify-content: center;
   align-items: center;
   height: 3rem;
   aspect-ratio: 1/1;
+
+  user-select: none;
 }
-.navGrid>.icon>* {
+.item>.icon>* {
   height: 75%;
   aspect-ratio: 1/1;
 }

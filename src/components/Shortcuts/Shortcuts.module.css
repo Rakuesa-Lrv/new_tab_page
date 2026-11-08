@@ -1,0 +1,11 @@
+.navigator {
+  /* width: 70%; */
+  height: fit-content;
+  display: grid;
+
+  position: absolute;
+  bottom: 20vh;
+  place-items: center;
+
+  gap: 2rem;
+}

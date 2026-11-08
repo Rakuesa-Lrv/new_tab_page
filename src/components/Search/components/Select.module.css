@@ -13,6 +13,7 @@
   min-width: 7rem;
   user-select: none;
   background-color: #d2e6f67f;
+  backdrop-filter: blur(1px);
 }
 
 .trigger {
@@ -68,16 +69,14 @@
   background-color: transparent;
   transition: all .2s;
 }
-.item:focus {
+.item:focus-visible {
   outline: none;
   background-color: #cadfeec0;
-  /* outline: #5487b79a solid .1rem; */
   box-shadow: 
     -1px 0px 2px var(--focus),
     1px 0px 2px var(--focus),
     0px -1px 2px var(--focus),
     0px 1px 2px var(--focus);
-  /* filter: brightness(.9); */
 }
 
 .itemText {

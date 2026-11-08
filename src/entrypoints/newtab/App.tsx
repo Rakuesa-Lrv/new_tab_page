@@ -1,13 +1,13 @@
 import Background from "@/components/Background";
 import Search from "@/components/Search/Search";
 import EditBtn from "@/components/EditBtn";
-import Navigator from "@/components/Navigator/Navigator";
+import Shortcuts from "@/components/Shortcuts/Shortcuts";
 
 const App = ()=> {
   return (
     <Background>
       <Search />
-      <Navigator />
+      <Shortcuts />
       <EditBtn />
     </Background>
   )

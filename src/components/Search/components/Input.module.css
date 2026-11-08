@@ -14,6 +14,7 @@
   font-size: .9rem;
   color: #1c3041d2;
   background-color: #d2e6f67f;
+  backdrop-filter: blur(1px);
   border-radius: 999rem;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;

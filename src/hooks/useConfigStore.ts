@@ -1,24 +1,71 @@
-import type { engine } from "@/utils/searchEngine";
 import { create } from "zustand";
 import { combine, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
-interface State {
-  defaultSearchEngine: engine,
+import type { engine } from "@/utils/searchEngine";
+import { wxtLocalStorage } from "@/utils/storage";
 
+export interface Shortcut {
+  id: string,
+  url: string,
+  iconUrl: string,
+  name: string,
 }
+
+interface State {
+  defaultEngine: engine,
+  shortCutList: Shortcut[],
+}
+
+type changeShortcutAction = 
+| { type: 'PUSH', shortcut: Omit<Shortcut, 'id'> }
+| { type: 'UPDATE', shortcut: Shortcut }
+| { type: 'REMOVE', id: Shortcut['id'] }
+
+;
 
 const useConfigStore = create(persist(immer(combine(
   {
-    defaultSearchEngine: 'Google',
+    defaultEngine: 'Google',
+    shortCutList: [],
   } as State,
   (set)=> ({
     setEngine: (engine: engine)=> {
       set(draft=> {
-        draft.defaultSearchEngine = engine;
+        draft.defaultEngine = engine;
       })
     },
+    changeShortcut: (action: changeShortcutAction)=> {
+      set(draft=> {
+        switch(action.type) {
+          case "PUSH":
+            draft.shortCutList.push({
+              ...action.shortcut, 
+              id: crypto.randomUUID(),
+            })
+            break;
+          case "UPDATE":
+            const cs = draft.shortCutList;
+            cs.forEach(item=> {
+              item.id===action.shortcut.id && (()=>{
+                item = { ...action.shortcut }
+              })();
+            })
+            break;
+          case "REMOVE":
+            const sc = draft.shortCutList;
+            const idx = sc.findIndex(item=> item.id===action.id);
+            draft.shortCutList.splice(idx, 1);
+            break;
+        }
+      })
+    }
   })
-)), { name: 'config' }));
+)), { 
+  name: '_ZN_config_storge',
+  version: 1,
+  storage: wxtLocalStorage<State>(),
+  skipHydration: true,
+}));
 
 export default useConfigStore;

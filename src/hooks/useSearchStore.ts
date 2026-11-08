@@ -1,18 +1,13 @@
-import type { engine } from "@/utils/searchEngine";
 import { create } from "zustand";
 import { combine } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 interface State {
-  engine: engine | undefined,
   query: string,
 }
 
-
-
 const useSearchStore = create(immer(combine(
   {
-    engine: undefined,
     query: '',
   } as State,
   (set)=> ({
@@ -21,11 +16,6 @@ const useSearchStore = create(immer(combine(
         draft.query = query;
       })
     },
-    setEngine: (engine: engine)=> {
-      set(draft=> {
-        draft.engine = engine;
-      })
-    }
   })
 )));
 

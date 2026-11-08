@@ -1,61 +1,23 @@
-import classes from './Navigator.module.css';
+import classes from './Shortcuts.module.css';
 
-import getIconURL from '@/utils/getIco';
-import globeIcon from '@/assets/globe.svg';
 import plusIcon from '@/assets/plus.svg'
-/* 
-link[rel~='icon'] 
-*/
 
-export interface LinkItem {
-  url: string,
-  iconUrl: string,
-  name: string,
-}
+import useConfigStore, { type Shortcut } from '@/hooks/useConfigStore';
+import useStoreField from '@/hooks/useStoreField';
+import useDisplayStore from '@/hooks/useDisplayStore';
 
-interface GridProps extends React.HTMLAttributes<HTMLDivElement>, LinkItem {};
+import AddForm from './components/AddForm';
+import ShortcutItem from './components/ShortcutItem';
 
-const NavGrid = ({
-  url,
-  iconUrl,
-  name,
-}: GridProps)=> {
-  return (
-    <a
-      href={url}
-      className={classes.navGrid}
-    >
-
-      <div
-        className={classes.icon}
-      >
-        <img 
-          src={
-            URL.canParse(iconUrl)
-            ? iconUrl
-            : globeIcon
-          } 
-          alt={name} />
-      </div>
-      <p>{name}</p>
-      <div
-        className={classes.operator}
-      >
-
-      </div>
-    </a>
-  )
-}
-
-const linkList: LinkItem[] = [
+const linkList = [
   {
     url: 'https://nodejs.org/en',
     iconUrl: 'https://nodejs.org/static/images/favicons/favicon.png',
     name: 'Node.js',
   },
   {
-    url: 'https://www.tslang.cn/',
-    iconUrl: 'https://www.tslang.cn/favicon-32x32.png?v=8944a05a8b601855de116c8a56d3b3ae',
+    url: 'https://www.typescriptlang.org/',
+    iconUrl: 'https://www.typescriptlang.org/favicon-32x32.png?v=8944a05a8b601855de116c8a56d3b3ae',
     name: 'TypeScript',
   },
   {
@@ -103,17 +65,35 @@ const linkList: LinkItem[] = [
     iconUrl: 'https://developer.mozilla.org/favicon.ico',
     name: 'MDN - 开发者的资源 由开发者打造',
   },
-]
+] as Shortcut[];
+;(()=> {
+  linkList.forEach(item=> {
+    item.id = item.url.split('://')[1] ?? crypto.randomUUID();
+  })
+})();
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  columns: number,
-  rows: number,
+  columns?: number,
+  rows?: number,
 }
-const Navigator = ({
+const Shortcuts = ({
   columns = 6,
   rows = 2,
 }: Props)=> {
+  const { showAdd, changeAdd } = useStoreField(useDisplayStore, [
+    'showAdd',
+    'changeAdd'
+  ])
+
+  const { shortCutList } = useStoreField(useConfigStore, [
+    'shortCutList',
+  ])
+
   return (
+    <>
+
+    {showAdd && <AddForm />}
+
     <div
       className={classes.navigator}
       style={{
@@ -121,25 +101,21 @@ const Navigator = ({
         gridTemplateRows: `repeat(${rows}, 1fr)`,
       }}
     >
-      {linkList.map((item)=>(
-        <NavGrid {...item} />
+      {shortCutList.map((item)=>(
+        <ShortcutItem {...item} key={item.id}/>
       ))}
-      {linkList.length<columns*rows && 
-        <div
-          className={classes.navGrid}
-        >
-          <div
-            className={classes.icon}
-          >
-          <img 
-            src={plusIcon} 
-            alt='添加快捷方式' />
-          </div>
-          <p>添加快捷方式</p>
-        </div>
-      }
+      {linkList.length<columns*rows && (
+        <ShortcutItem 
+          isAdd
+          url='#' 
+          iconUrl={plusIcon} 
+          name='添加快捷方式'
+        />
+      )}
     </div>
+
+    </>
   )
 }
 
-export default Navigator;
+export default Shortcuts;
