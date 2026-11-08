@@ -17,6 +17,20 @@ interface Input extends Omit<Shortcut, 'id'> {
   isCustomIcon: boolean,
 };
 
+const normalizeUrl = (url: string):string=> {
+  const trimmed = url.trim();
+  if(!trimmed) return trimmed;
+  if(/^[a-z][a-z0-9+.-]*:\/\//i.test(trimmed)) return trimmed;
+  
+  const isLocalhost = /^(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(trimmed);
+  const isIp = /^\d{1,3}(\.\d{1,3}){3}(:\d+)?(\/|$)/.test(trimmed);
+  const isSingleLabel = /^[^./]+(:\d+)?(\/|$)/.test(trimmed);
+
+  if(!(isLocalhost || isIp || isSingleLabel)) return `https://${trimmed}`;
+  
+  return trimmed;
+}
+
 const AddForm = ()=> {
   const { showAdd, changeAdd } = useStoreField(useDisplayStore, [
     'showAdd',
@@ -63,6 +77,8 @@ const AddForm = ()=> {
             onSubmit={(e)=> {
               e.preventDefault();
               changeShortcut({ type: 'PUSH', shortcut: input })
+              const nUrl = normalizeUrl(input.url);
+              updateInput((draft)=> {draft.url = nUrl});
               changeAdd('close');
             }}
             className={classes.form}
@@ -76,7 +92,7 @@ const AddForm = ()=> {
                 value={input.name}
                 onChange={(e)=> {
                   const name = e.currentTarget.value;
-                  updateInput(draft=> {draft.name= name});
+                  updateInput((draft)=> {draft.name= name});
                 }}
               />
             </label>
@@ -89,8 +105,16 @@ const AddForm = ()=> {
                 value={input.url}
                 onChange={(e)=>{
                   const url = e.currentTarget.value;
-                  updateInput(draft=> {draft.url = url});
-                  updateInput(draft=> {draft.iconUrl = getIconURL(url)?.some || " " });
+                  updateInput((draft)=> {draft.url = url});
+                  updateInput((draft)=> {draft.iconUrl = getIconURL(url)?.some || " " });
+                  console.log("wasd");
+                  
+                }}
+                onBlur={(e)=> {
+                  const url = e.currentTarget.value;
+                  const nUrl = normalizeUrl(url);
+                  updateInput((draft)=> {draft.url = nUrl});
+                  updateInput((draft)=> {draft.iconUrl = getIconURL(nUrl)?.some || " " });
                 }}
               />
             </label>
@@ -103,7 +127,7 @@ const AddForm = ()=> {
                 name='isCustomIcon'
                 onChange={(e)=> {
                   const checked = e.currentTarget.checked;
-                  updateInput(draft=> {draft.isCustomIcon = checked});
+                  updateInput((draft)=> {draft.isCustomIcon = checked});
                 }}
               />
             </label>
@@ -117,7 +141,7 @@ const AddForm = ()=> {
                   value={input.iconUrl}
                   onChange={(e)=>{
                     const iconUrl = e.currentTarget.value;
-                    updateInput(draft=> {draft.iconUrl = iconUrl});
+                    updateInput((draft)=> {draft.iconUrl = iconUrl});
                   }}
                 />
               </label>
