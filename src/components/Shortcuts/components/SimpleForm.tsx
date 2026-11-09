@@ -50,6 +50,8 @@ const SimpleForm = ({
     'changeShortcut'
   ])
 
+  console.log(initial);
+  
   const [input, updateInput] = useImmer<Input>({
     name: initial?.name ?? '',
     url: initial?.url ?? '',
@@ -109,6 +111,7 @@ const SimpleForm = ({
                 onChange={(e)=> {
                   const name = e.currentTarget.value;
                   updateInput((draft)=> {draft.name= name});
+                  name.trim()==='' 
                 }}
               />
             </label>
@@ -130,6 +133,7 @@ const SimpleForm = ({
                   const nUrl = normalizeUrl(url);
                   updateInput((draft)=> {draft.url = nUrl});
                   updateInput((draft)=> {draft.iconUrl = getIconURL(nUrl)?.some || "" });
+
                   const hostname = new URL(nUrl)?.hostname?.replace(/^.*\.(.*)\..*/, '$1');
                   input.name.trim()==='' && (updateInput(draft=> { draft.name = hostname || '' }))
                   

@@ -29,7 +29,6 @@ const Positive = ({
   return (
     <a
       href={url}
-      target='_blank'
       className={classes.item}
       onClick={
         isAdd
@@ -37,7 +36,7 @@ const Positive = ({
           e.preventDefault(); 
           dispatch({ display: 'open', act: 'add' })
         })
-        : ((e)=> { e.preventDefault() })
+        : undefined
       }
     >
       <div
@@ -74,10 +73,10 @@ const Negative = ({tar}: Pick<Props, 'tar'>)=> {
         onClick={(e)=> {
           e.stopPropagation();
           dispatch({ display: 'open', act: 'update', tar: tar });
-          dispatch({ display: 'close', act: 'reverse' })
+          dispatch({ display: 'close', act: 'reverse', tar: tar })
         }}
       >
-        <Pencil1Icon /> <span>修改</span>
+        <Pencil1Icon /> <span>编辑</span>
       </button>
       <hr className={classes.separator} />
       <button 
@@ -86,7 +85,7 @@ const Negative = ({tar}: Pick<Props, 'tar'>)=> {
         onClick={(e)=> {
           e.stopPropagation();
           dispatch({ display: 'open', act: 'delete', tar: tar });
-          dispatch({ display: 'close', act: 'reverse' })
+          dispatch({ display: 'close', act: 'reverse', tar: tar })
         }}
       >
         <TrashIcon /> <span>删除</span>
