@@ -9,25 +9,15 @@
 }
 .card:hover,
 .card:focus-visible {
-  /* outline: #5487b79a solid .1rem; */
-  /* box-shadow: 
-    -1px 0px 2px var(--focus),
-    1px 0px 2px var(--focus),
-    0px -1px 2px var(--focus),
-    0px 1px 2px var(--focus); */
-  /* background-color: #cadfeec0; */
   transform: scale(1.1);
 }
 .contain:hover,
 .contain:focus-visible {
-  /* outline: #5487b79a solid .1rem; */
   box-shadow: 
     -1px 0px 2px var(--focus),
     1px 0px 2px var(--focus),
     0px -1px 2px var(--focus),
     0px 1px 2px var(--focus);
-  /* background-color: #cadfeec0; */
-  transform: scale(1.1);
 }
 
 .contain {
