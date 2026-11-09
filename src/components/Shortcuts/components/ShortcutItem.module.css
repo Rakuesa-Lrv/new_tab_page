@@ -3,6 +3,33 @@
   --focus: #5487b79a;
 }
 
+.card {
+  border-radius: .4rem;
+  background-color: #d2e6f67f;
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+  backdrop-filter: blur(1px);
+}
+.card:hover,
+.card:focus-visible {
+  /* outline: #5487b79a solid .1rem; */
+  box-shadow: 
+    -1px 0px 2px var(--focus),
+    1px 0px 2px var(--focus),
+    0px -1px 2px var(--focus),
+    0px 1px 2px var(--focus);
+  /* background-color: #cadfeec0; */
+  transform: scale(1.1);
+}
+.contain[data-reversed='true'] {
+  transform: rotateY(180deg);
+}
+.contain {
+  transition: all .2s;
+}
 .item {
   position: relative;
   display: flex;
@@ -15,7 +42,6 @@
   padding: .6rem;
   border-radius: .4rem;
 
-  background-color: #d2e6f67f;
 
   color: #1c3041d2;
   text-decoration: none;
@@ -28,29 +54,16 @@
   cursor: pointer;
   user-select: none;
 
-  box-shadow: 
-    -2px 0px 2px var(--shadow),
-    2px 0px 2px var(--shadow),
-    0px -2px 2px var(--shadow),
-    0px 2px 2px var(--shadow);
-  backdrop-filter: blur(1px);
-
   transition: all .2s;
 }
-
+.item:not(.reversed) {
+  z-index: 1;
+}
+.contain[data-reversed='true']>.item:not(.reversed) {
+  z-index: -1;
+}
 .item:focus {
   outline: none;
-}
-.item:hover,
-.item:focus-visible {
-  /* outline: #5487b79a solid .1rem; */
-  box-shadow: 
-    -1px 0px 2px var(--focus),
-    1px 0px 2px var(--focus),
-    0px -1px 2px var(--focus),
-    0px 1px 2px var(--focus);
-  background-color: #cadfeec0;
-  transform: scale(1.1);
 }
 
 .item>* {
@@ -82,6 +95,7 @@
 
 .more {
   position: absolute;
+  z-index: 2;
   top: .4rem;
   right: .2rem;
   opacity: 0;
@@ -101,7 +115,7 @@
     0px 1px 2px var(--shadow);
 }
 
-.item:hover>.more {
+.card:hover>.more {
   opacity: 1;
 }
 .more:hover {
@@ -111,4 +125,48 @@
     0px -1px 2px var(--focus),
     0px 1px 2px var(--focus);
   background-color: #cadfeec0;
+}
+
+.reversed {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  background-color: transparent;
+  transform: rotateY(180deg);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  gap: 0;
+
+  opacity: 0;
+
+  transition: all .2s;
+}
+.contain[data-reversed='true']>.item:not(.reversed) {
+  opacity: 0;
+}
+.contain[data-reversed='true']>.reversed {
+  opacity: 1;
+}
+.reversed>button {
+  flex-grow: 1;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.reversed>.deleteBtn {
+  background-color: #eecad2c0;
+  color: #e41441d6;
+}
+.reversed>.deleteBtn:hover,
+.reversed>.deleteBtn:focus-visible {
+  background-color: #f1b4c2c0;
+}
+
+.separator {
+  width: 80%;
+  height: 0;
+  border-top: .1rem dashed #8cafcbb7;
+  border-bottom: .1rem dashed #eecad2c0;
 }

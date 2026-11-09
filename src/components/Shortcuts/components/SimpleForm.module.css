@@ -1,9 +1,6 @@
 :root {
   --shadow: #697c8c7f;
   --focus: #5487b79a;
-
-  --warning: #cf5b767f;
-
 }
 
 .add {
@@ -92,6 +89,12 @@
   appearance: none;
   cursor: pointer;
 }
+
+input:disabled,
+[type='checkbox']:disabled {
+  cursor: not-allowed;
+}
+
 .form>label>input[type='checkbox'] {
   width: .8rem;
   height: .8rem;
@@ -141,19 +144,6 @@
     1px 0px 2px var(--focus),
     0px -1px 2px var(--focus),
     0px 1px 2px var(--focus);
-}
-
-.btnList>.deleta {
-  background-color: #eecad2c0;
-  box-shadow: 
-    -1px 0px 2px var(--warning),
-    1px 0px 2px var(--warning),
-    0px -1px 2px var(--warning),
-    0px 1px 2px var(--warning);
-}
-.btnList>.deleta:hover,
-.btnList>.deleta:focus-visible {
-  background-color: #f1b4c2c0;
 }
 
 .display {

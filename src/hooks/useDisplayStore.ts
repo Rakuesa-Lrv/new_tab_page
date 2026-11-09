@@ -3,11 +3,11 @@ import { combine } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import type { Shortcut } from "./useConfigStore";
 
-const actC = ['close', 'open'] as const;
+const actC = ['close', 'open', 'swap'] as const;
 type display = typeof actC[number];
 
-const displayItemC = ['add', 'update', 'delete'] as const;
-type act = typeof displayItemC[number];
+const displayItemC = ['add', 'update', 'delete', 'reverse'] as const;
+export type act = typeof displayItemC[number];
 
 type CapDisplayItem = Capitalize<act>;
 
@@ -21,6 +21,7 @@ const useDisplayStore = create(immer(combine(
   {
     showAdd: false,
     showUpdate: false,
+    showDelete: false,
     tar: '',
   } as State,
   (set)=> ({
@@ -34,6 +35,9 @@ const useDisplayStore = create(immer(combine(
           case "open":
             draft[show] ||= true;
             break;
+          case "swap":
+            draft[show] = !draft[show];
+            draft.tar = '';
         }
         draft.tar = action.tar ?? '';
       })

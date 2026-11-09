@@ -9,6 +9,8 @@ import type { Shortcut } from '@/hooks/useConfigStore';
 import { useImmer } from 'use-immer';
 import useConfigStore from '@/hooks/useConfigStore';
 
+import type { act } from '@/hooks/useDisplayStore';
+
 interface Input extends Omit<Shortcut, 'id'> {
   isCustomIcon: boolean,
 };
@@ -27,14 +29,18 @@ const normalizeUrl = (url: string):string=> {
   return trimmed;
 }
 
-interface Props {
-  act: 'add' | 'update',
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  act: act,
   initial?: Shortcut,
+  title: string,
 }
 
 const SimpleForm = ({
   act,
   initial,
+  title,
+  children,
 }: Props)=> {
 
   const { dispatch } = useStoreField(useDisplayStore, [
@@ -70,20 +76,25 @@ const SimpleForm = ({
           <p
             className={classes.legend}
           >
-            {act==='add' && '添加快捷方式'}
-            {act==='update' && '编辑快捷方式'}
+            { title }
           </p>
           <form
             onSubmit={(e)=> {
               e.preventDefault();
               const nUrl = normalizeUrl(input.url);
               updateInput((draft)=> {draft.url = nUrl});
-              act==='add' && (()=> {
-                changeShortcut({ type: 'PUSH', shortcut: input })
-              })();
-              act==='update' && initial && (()=> {
-                changeShortcut({ type: 'UPDATE', shortcut: {...input, id: initial?.id},  })
-              })();
+
+              switch(act) {
+                case 'add':
+                  changeShortcut({ type: 'PUSH', shortcut: input });
+                  break;
+                case 'update':
+                  initial && (changeShortcut({ type: 'UPDATE', shortcut: {...input, id: initial?.id} }))
+                  break;
+                case 'delete':
+                  initial && (changeShortcut({ type: 'DELETE', id: initial?.id }))
+                  break; 
+              }
               dispatch({ display: 'close', act: act });
             }}
             className={classes.form}
@@ -91,6 +102,7 @@ const SimpleForm = ({
             <label>
               <span>名称:</span>
               <input 
+                disabled={act==='delete'}
                 type='text'
                 name='name'
                 placeholder='请输入名称(为空则自动获取网页标题)'
@@ -104,6 +116,7 @@ const SimpleForm = ({
             <label>
               <span>网址:</span>
               <input 
+                disabled={act==='delete'}
                 type='text'
                 name='url'
                 placeholder='请输入网址'
@@ -112,8 +125,6 @@ const SimpleForm = ({
                   const url = e.currentTarget.value;
                   updateInput((draft)=> {draft.url = url});
                   updateInput((draft)=> {draft.iconUrl = getIconURL(url)?.some || " " });
-                  console.log("wasd");
-                  
                 }}
                 onBlur={(e)=> {
                   const url = e.currentTarget.value;
@@ -126,6 +137,8 @@ const SimpleForm = ({
             <label>
               <span>自定义图标</span>
               <input 
+                disabled={act==='delete'}
+                checked={act==='delete'}
                 type='checkbox' 
                 name='isCustomIcon'
                 onChange={(e)=> {
@@ -134,10 +147,11 @@ const SimpleForm = ({
                 }}
               />
             </label>
-            {input.isCustomIcon && (
+            {input.isCustomIcon || act==='delete' && (
               <label>
                 <span>图标:</span>
                 <input 
+                  disabled={act==='delete'}
                   type='text'
                   name='icon'
                   placeholder='请输入图标连接'
@@ -152,22 +166,9 @@ const SimpleForm = ({
             <div
               className={classes.btnList}
             >
-              <button type='submit'>
-                { act==='add' && '添加' }
-                { act==='update' && '修改' }
-              </button>
-              { act==='update' && (
-                <button 
-                  type='button'
-                  className={classes.deleta}
-                  onClick={()=> {
-                    initial && changeShortcut({ type: 'REMOVE', id: initial?.id })
-                    dispatch({ display: 'close', act:'update'})
-                  }}
-                >
-                  删除
-                </button>
-              ) }
+              
+              { children }
+
               <button 
                 type='button'
                 onClick={()=> {
@@ -185,6 +186,7 @@ const SimpleForm = ({
         >
           <ShortcutItem
             tar='_ZN_example_shortcut'
+            isExample
             name={input.name}
             url={input.url}
             iconUrl={input.iconUrl}

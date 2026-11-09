@@ -1,5 +1,3 @@
-import classes from './AddForm.module.css';
-
 import Backdrop from '@/components/Backdrop';
 
 import SimpleForm from './SimpleForm';
@@ -21,7 +19,11 @@ const UpdateForm = ()=> {
 
   return (
     <Backdrop>
-      <SimpleForm act='update' initial={initial} />
+      <SimpleForm act='update' initial={initial} title='编辑快捷方式'>
+        <button type='submit'>
+          <span>修改</span>
+        </button>
+      </SimpleForm>
     </Backdrop>
   )
 }

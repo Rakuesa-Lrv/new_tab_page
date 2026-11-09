@@ -20,8 +20,7 @@ interface State {
 type changeShortcutAction = 
 | { type: 'PUSH', shortcut: Omit<Shortcut, 'id'> }
 | { type: 'UPDATE', shortcut: Shortcut }
-| { type: 'REMOVE', id: Shortcut['id'] }
-
+| { type: 'DELETE', id: Shortcut['id'] }
 ;
 
 const useConfigStore = create(persist(immer(combine(
@@ -51,7 +50,7 @@ const useConfigStore = create(persist(immer(combine(
             draft.shortCutList[idx] = {...action.shortcut};
             break;
           }
-          case "REMOVE": {
+          case "DELETE": {
             const sc = draft.shortCutList;
             const idx = sc.findIndex(item=> item.id===action.id);
             draft.shortCutList.splice(idx, 1);

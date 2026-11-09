@@ -9,6 +9,7 @@ import useDisplayStore from '@/hooks/useDisplayStore';
 import AddForm from './components/AddForm';
 import UpdateForm from './components/UpdateForm';
 import ShortcutItem from './components/ShortcutItem';
+import DeleteForm from './components/DeleteForm';
 
 const linkList = [
   {
@@ -96,16 +97,17 @@ const Shortcuts = ({
 
     { showAdd && <AddForm /> }
     { showUpdate && <UpdateForm /> }
+    { showDelete && <DeleteForm /> }
 
     <div
-      className={classes.navigator}
+      className={classes.shortcuts}
       style={{
         gridTemplateColumns: `repeat(${columns}, 1fr)`,
         gridTemplateRows: `repeat(${rows}, 1fr)`,
       }}
     >
-      {shortCutList.map((item)=>(
-        <ShortcutItem {...item} key={item.id} tar={item.id} />
+      {shortCutList.map((item,idx)=>(
+        <ShortcutItem {...item} key={item.id} tar={item.id} isReversed={idx===0}/>
       ))}
       {linkList.length<columns*rows && (
         <ShortcutItem 
