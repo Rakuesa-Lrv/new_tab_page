@@ -82,10 +82,11 @@ const Shortcuts = ({
   columns = 6,
   rows = 2,
 }: Props)=> {
-  const { showAdd, showUpdate, showDelete } = useStoreField(useDisplayStore, [
+  const { showAdd, showUpdate, showDelete, tar } = useStoreField(useDisplayStore, [
     'showAdd',
     'showUpdate',
     'showDelete',
+    'tar'
   ])
 
   const { shortCutList } = useStoreField(useConfigStore, [
@@ -106,8 +107,13 @@ const Shortcuts = ({
         gridTemplateRows: `repeat(${rows}, 1fr)`,
       }}
     >
-      {shortCutList.map((item,idx)=>(
-        <ShortcutItem {...item} key={item.id} tar={item.id} isReversed={idx===0}/>
+      {shortCutList.map((item)=>(
+        <ShortcutItem 
+          {...item} 
+          key={item.id} 
+          tar={item.id} 
+          isReversed={tar===item.id}
+        />
       ))}
       {linkList.length<columns*rows && (
         <ShortcutItem 

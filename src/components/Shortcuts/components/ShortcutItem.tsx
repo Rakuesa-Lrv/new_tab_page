@@ -115,7 +115,6 @@ const ShortcutItem = (props: Props)=> {
           onClick={(e)=> {
             e.stopPropagation();
             dispatch({ display: 'swap', act: 'reverse', tar: reversed ?'' :props.tar });
-
           }}
         >
           {reversed

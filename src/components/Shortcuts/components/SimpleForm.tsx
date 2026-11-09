@@ -105,7 +105,7 @@ const SimpleForm = ({
                 disabled={act==='delete'}
                 type='text'
                 name='name'
-                placeholder='请输入名称(为空则自动获取网页标题)'
+                placeholder='请输入名称'
                 value={input.name}
                 onChange={(e)=> {
                   const name = e.currentTarget.value;
@@ -119,7 +119,7 @@ const SimpleForm = ({
                 disabled={act==='delete'}
                 type='text'
                 name='url'
-                placeholder='请输入网址'
+                placeholder='请输入网址(无协议将自动补全HTTPS协议)'
                 value={input.url}
                 onChange={(e)=>{
                   const url = e.currentTarget.value;
@@ -147,7 +147,7 @@ const SimpleForm = ({
                 }}
               />
             </label>
-            {input.isCustomIcon || act==='delete' && (
+            {(input.isCustomIcon || act==='delete') && (
               <label>
                 <span>图标:</span>
                 <input 
