@@ -50,6 +50,9 @@ const SimpleForm = ({
     'changeShortcut'
   ])
 
+  const getDefaultName = (url: string)=> (new URL(url)?.hostname);
+  const getDefaultIconUrl = (url: string) => (getIconURL(url)?.some || '');
+
   console.log(initial);
   
   const [input, updateInput] = useImmer<Input>({
@@ -111,7 +114,9 @@ const SimpleForm = ({
                 onChange={(e)=> {
                   const name = e.currentTarget.value;
                   updateInput((draft)=> {draft.name= name});
-                  name.trim()==='' 
+                }}
+                onBlur={(e)=> {
+                  input.name.trim()==='' && (updateInput(draft=> { draft.name = getDefaultName(input.url) }));
                 }}
               />
             </label>
@@ -127,16 +132,19 @@ const SimpleForm = ({
                   const url = e.currentTarget.value;
                   updateInput((draft)=> {draft.url = url});
                   updateInput((draft)=> {draft.iconUrl = getIconURL(url)?.some || " " });
+                  const defaultName = getDefaultName(url);
+                  (input.name.trim()==='' 
+                  || defaultName.includes(input.name)
+                  || input.name.includes(defaultName)
+                  ) && (updateInput(draft=> { draft.name = defaultName }));
                 }}
                 onBlur={(e)=> {
                   const url = e.currentTarget.value;
                   const nUrl = normalizeUrl(url);
                   updateInput((draft)=> {draft.url = nUrl});
-                  updateInput((draft)=> {draft.iconUrl = getIconURL(nUrl)?.some || "" });
 
-                  const hostname = new URL(nUrl)?.hostname?.replace(/^.*\.(.*)\..*/, '$1');
-                  input.name.trim()==='' && (updateInput(draft=> { draft.name = hostname || '' }))
-                  
+                  input.iconUrl.trim()==='' && (updateInput(draft=> { draft.iconUrl = getDefaultIconUrl(nUrl) }));
+                  input.name.trim()==='' && (updateInput(draft=> { draft.name = getDefaultName(nUrl) }));
                 }}
               />
             </label>
@@ -165,6 +173,8 @@ const SimpleForm = ({
                   onChange={(e)=>{
                     const iconUrl = e.currentTarget.value;
                     updateInput((draft)=> {draft.iconUrl = iconUrl});
+
+                    iconUrl.trim()==='' && (updateInput(draft=> { draft.iconUrl = getDefaultIconUrl(input.url) }));
                   }}
                 />
               </label>
@@ -172,9 +182,7 @@ const SimpleForm = ({
             <div
               className={classes.btnList}
             >
-              
               { children }
-
               <button 
                 type='button'
                 onClick={()=> {
