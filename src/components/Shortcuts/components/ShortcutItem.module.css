@@ -4,8 +4,7 @@
 }
 
 .card {
-  transition: all .2s;
-  
+  transition: all .1s .1s;
 }
 .card:hover,
 .card:focus-visible {
@@ -59,7 +58,7 @@
   cursor: pointer;
   user-select: none;
 
-  transition: all .2s;
+  transition: opacity .05s;
 }
 .item:not(.reversed) {
   z-index: 1;
@@ -104,7 +103,7 @@
   top: .4rem;
   right: .2rem;
   opacity: 0;
-  transition: .2s ease-in;
+  transition: all .2s ease-in;
   min-height: 0;
   width: 1.2rem;
   display: inline-flex;
