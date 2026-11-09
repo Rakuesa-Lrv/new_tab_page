@@ -33,7 +33,10 @@ const Positive = ({
       className={classes.item}
       onClick={
         isAdd
-        ? (()=> {dispatch({ display: 'open', act: 'add' })})
+        ? ((e)=> { 
+          e.preventDefault(); 
+          dispatch({ display: 'open', act: 'add' })
+        })
         : ((e)=> { e.preventDefault() })
       }
     >
