@@ -73,7 +73,7 @@ const Negative = ({tar}: Pick<Props, 'tar'>)=> {
         onClick={(e)=> {
           e.stopPropagation();
           dispatch({ display: 'open', act: 'update', tar: tar });
-          dispatch({ display: 'swap', act: 'reverse', tar: tar })
+          dispatch({ display: 'close', act: 'reverse', tar: tar })
         }}
       >
         <Pencil1Icon /> <span>编辑</span>
@@ -85,7 +85,7 @@ const Negative = ({tar}: Pick<Props, 'tar'>)=> {
         onClick={(e)=> {
           e.stopPropagation();
           dispatch({ display: 'open', act: 'delete', tar: tar });
-          dispatch({ display: 'swap', act: 'reverse', tar: tar })
+          dispatch({ display: 'close', act: 'reverse', tar: tar })
         }}
       >
         <TrashIcon /> <span>删除</span>
@@ -97,7 +97,8 @@ const Negative = ({tar}: Pick<Props, 'tar'>)=> {
 const ShortcutItem = (props: Props)=> {
   const isReversed = props.isReversed;
   
-  const { dispatch } = useStoreField(useDisplayStore, [
+  const { showReverse, dispatch } = useStoreField(useDisplayStore, [
+    'showReverse',
     'dispatch',
   ]);
 
@@ -118,7 +119,7 @@ const ShortcutItem = (props: Props)=> {
           className={classes.more}
           onClick={(e)=> {
             e.stopPropagation();
-            dispatch({ display: 'swap', act: 'reverse', tar: isReversed ?'' :props.tar });
+            dispatch({ display: 'swap', act: 'reverse', tar: props.tar });
           }}
         >
           {isReversed

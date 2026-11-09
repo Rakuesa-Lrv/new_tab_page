@@ -37,8 +37,11 @@ const useDisplayStore = create(immer(combine(
             draft[show] ||= true;
             break;
           case "swap":
-            draft[show] = !draft[show];
-            draft.tar = '';
+            !draft.tar
+            ? (draft[show] ||= true)
+            : (draft.tar===action.tar  
+              ?(draft[show] = !draft[show])
+              :(draft[show] ||= true));
             break;
         }
         draft.tar = action.tar ?? '';

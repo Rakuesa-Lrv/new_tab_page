@@ -50,7 +50,7 @@ const SimpleForm = ({
     'changeShortcut'
   ])
 
-  const getDefaultName = (url: string)=> (new URL(url)?.hostname);
+  const getDefaultName = (url: string)=> (URL.canParse(url)? new URL(url)?.hostname: '');
   const getDefaultIconUrl = (url: string) => (getIconURL(url)?.some || '');
 
   console.log(initial);
