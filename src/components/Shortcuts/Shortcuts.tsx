@@ -11,69 +11,6 @@ import UpdateForm from './components/UpdateForm';
 import ShortcutItem from './components/ShortcutItem';
 import DeleteForm from './components/DeleteForm';
 
-const linkList = [
-  {
-    url: 'https://nodejs.org/en',
-    iconUrl: 'https://nodejs.org/static/images/favicons/favicon.png',
-    name: 'Node.js',
-  },
-  {
-    url: 'https://www.typescriptlang.org/',
-    iconUrl: 'https://www.typescriptlang.org/favicon-32x32.png?v=8944a05a8b601855de116c8a56d3b3ae',
-    name: 'TypeScript',
-  },
-  {
-    url: 'https://www.mongodb.com/zh-cn',
-    iconUrl: 'https://www.mongodb.com/zh-cn/assets/images/global/favicon.ico',
-    name: 'MongoDB',
-  },
-  {
-    url: 'https://v2.tauri.app/zh-cn/',
-    iconUrl: 'https://v2.tauri.app/favicon.svg',
-    name: 'Tauri 2.0',
-  },
-  {
-    url: 'https://spdx.org/licenses/',
-    iconUrl: 'https://spdx.org/licenses/sites/all/themes/cpstandard/favicon.ico',
-    name: 'SPDX',
-  },
-  {
-    url: 'https://semver.org/lang/zh-CN/',
-    iconUrl: 'https://semver.org/assets/500x500(light).jpg',
-    name: '语义化版本',
-  },
-  {
-    url: 'https://zh-hans.react.dev/learn',
-    iconUrl: 'https://zh-hans.react.dev/favicon-32x32.png',
-    name: 'React',
-  },
-  {
-    url: 'https://zustand.site/zh/',
-    iconUrl: '🐻',
-    name: 'Zustand',
-  },
-  {
-    url: 'https://docs.emmet.com.cn/',
-    iconUrl: 'https://docs.emmet.com.cn/-/3755353140/favicon.ico',
-    name: 'Emmet',
-  },
-  {
-    url: 'https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references',
-    iconUrl: 'https://resources.whatwg.org/logo.svg',
-    name: 'HTML Standard',
-  },
-  {
-    url: 'https://developer.mozilla.org/zh-CN/',
-    iconUrl: 'https://developer.mozilla.org/favicon.ico',
-    name: 'MDN - 开发者的资源 由开发者打造',
-  },
-] as Shortcut[];
-;(()=> {
-  linkList.forEach(item=> {
-    item.id = item.url.split('://')[1] ?? crypto.randomUUID();
-  })
-})();
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   columns?: number,
   rows?: number,
@@ -115,7 +52,7 @@ const Shortcuts = ({
           isReversed={tar===item.id}
         />
       ))}
-      {linkList.length<columns*rows && (
+      {shortCutList.length<columns*rows && (
         <ShortcutItem 
           tar='_ZN_add_shortcut'
           isAdd
