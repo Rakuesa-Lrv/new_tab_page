@@ -28,6 +28,8 @@ const Positive = ({
 
   return (
     <a
+      href={url}
+      target='_blank'
       className={classes.item}
       onClick={
         isAdd

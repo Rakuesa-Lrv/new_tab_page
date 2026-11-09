@@ -11,8 +11,5 @@ export default defineConfig({
       'unlimitedStorage',
       'favicon'
     ],
-    host_permissions: [
-      '<all_urls>'
-    ]
   },
 });

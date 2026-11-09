@@ -3,7 +3,7 @@ import classes from './SimpleForm.module.css';
 import useDisplayStore from '@/hooks/useDisplayStore';
 import useStoreField from '@/hooks/useStoreField';
 import ShortcutItem from './ShortcutItem';
-import getIconURL from '@/utils/getIco';
+import getIconURL from '@/utils/getIcon/getIco';
 import type { Shortcut } from '@/hooks/useConfigStore';
 
 import { useImmer } from 'use-immer';
@@ -28,7 +28,6 @@ const normalizeUrl = (url: string):string=> {
   
   return trimmed;
 }
-
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   act: act,
@@ -138,7 +137,7 @@ const SimpleForm = ({
               <span>自定义图标</span>
               <input 
                 disabled={act==='delete'}
-                checked={act==='delete'}
+                checked={act==='delete' || input.isCustomIcon}
                 type='checkbox' 
                 name='isCustomIcon'
                 onChange={(e)=> {

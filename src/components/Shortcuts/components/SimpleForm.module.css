@@ -119,9 +119,10 @@ input:disabled,
 
 }
 [type='checkbox']:checked {
-  background-image: url('@/assets/check.svg');
+  background-image: url('/src/assets/check.svg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #bfa;
 }
 
 .btnList {

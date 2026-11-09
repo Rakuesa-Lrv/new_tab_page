@@ -4,17 +4,22 @@
 }
 
 .card {
-  border-radius: .4rem;
-  background-color: #d2e6f67f;
-  box-shadow: 
-    -2px 0px 2px var(--shadow),
-    2px 0px 2px var(--shadow),
-    0px -2px 2px var(--shadow),
-    0px 2px 2px var(--shadow);
-  backdrop-filter: blur(1px);
+  transition: all .2s;
+  
 }
 .card:hover,
 .card:focus-visible {
+  /* outline: #5487b79a solid .1rem; */
+  /* box-shadow: 
+    -1px 0px 2px var(--focus),
+    1px 0px 2px var(--focus),
+    0px -1px 2px var(--focus),
+    0px 1px 2px var(--focus); */
+  /* background-color: #cadfeec0; */
+  transform: scale(1.1);
+}
+.contain:hover,
+.contain:focus-visible {
   /* outline: #5487b79a solid .1rem; */
   box-shadow: 
     -1px 0px 2px var(--focus),
@@ -24,11 +29,21 @@
   /* background-color: #cadfeec0; */
   transform: scale(1.1);
 }
-.contain[data-reversed='true'] {
-  transform: rotateY(180deg);
-}
+
 .contain {
   transition: all .2s;
+
+  border-radius: .4rem;
+  background-color: #d2e6f67f;
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+  backdrop-filter: blur(1px);
+}
+.contain[data-reversed='true'] {
+  transform: rotateY(180deg);
 }
 .item {
   position: relative;
