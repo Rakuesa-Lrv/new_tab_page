@@ -19,10 +19,11 @@ const Shortcuts = ({
   columns = 6,
   rows = 2,
 }: Props)=> {
-  const { showAdd, showUpdate, showDelete, tar } = useStoreField(useDisplayStore, [
+  const { showAdd, showUpdate, showDelete, showReverse, tar } = useStoreField(useDisplayStore, [
     'showAdd',
     'showUpdate',
     'showDelete',
+    'showReverse',
     'tar'
   ])
 
@@ -49,7 +50,7 @@ const Shortcuts = ({
           {...item} 
           key={item.id} 
           tar={item.id} 
-          isReversed={tar===item.id}
+          isReversed={tar===item.id && showReverse}
         />
       ))}
       {shortCutList.length<columns*rows && (

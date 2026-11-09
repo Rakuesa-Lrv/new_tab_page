@@ -22,6 +22,7 @@ const useDisplayStore = create(immer(combine(
     showAdd: false,
     showUpdate: false,
     showDelete: false,
+    showReverse: false,
     tar: '',
   } as State,
   (set)=> ({
@@ -38,6 +39,7 @@ const useDisplayStore = create(immer(combine(
           case "swap":
             draft[show] = !draft[show];
             draft.tar = '';
+            break;
         }
         draft.tar = action.tar ?? '';
       })
