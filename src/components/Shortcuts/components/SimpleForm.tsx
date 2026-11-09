@@ -104,7 +104,7 @@ const SimpleForm = ({
                 disabled={act==='delete'}
                 type='text'
                 name='name'
-                placeholder='请输入名称'
+                placeholder='请输入名称(为空自动设为hostname)'
                 value={input.name}
                 onChange={(e)=> {
                   const name = e.currentTarget.value;
@@ -130,6 +130,9 @@ const SimpleForm = ({
                   const nUrl = normalizeUrl(url);
                   updateInput((draft)=> {draft.url = nUrl});
                   updateInput((draft)=> {draft.iconUrl = getIconURL(nUrl)?.some || "" });
+                  const hostname = new URL(nUrl)?.hostname?.replace(/^.*\.(.*)\..*/, '$1');
+                  input.name.trim()==='' && (updateInput(draft=> { draft.name = hostname || '' }))
+                  
                 }}
               />
             </label>
