@@ -73,7 +73,6 @@ const Negative = ({tar}: Pick<Props, 'tar'>)=> {
         onClick={(e)=> {
           e.stopPropagation();
           dispatch({ display: 'open', act: 'update', tar: tar });
-          dispatch({ display: 'close', act: 'reverse', tar: tar })
         }}
       >
         <Pencil1Icon /> <span>编辑</span>
@@ -85,7 +84,6 @@ const Negative = ({tar}: Pick<Props, 'tar'>)=> {
         onClick={(e)=> {
           e.stopPropagation();
           dispatch({ display: 'open', act: 'delete', tar: tar });
-          dispatch({ display: 'close', act: 'reverse', tar: tar })
         }}
       >
         <TrashIcon /> <span>删除</span>

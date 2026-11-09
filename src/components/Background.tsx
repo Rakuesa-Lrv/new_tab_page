@@ -20,7 +20,7 @@ const Background = ({
       }}
       onClick={(e)=> {
         e.stopPropagation();
-        dispatch({ display: 'close', act: 'reverse' })
+        e.currentTarget===e.target && (dispatch({ display: 'close', act: 'reverse' }));
       }}
     >
       {children}
