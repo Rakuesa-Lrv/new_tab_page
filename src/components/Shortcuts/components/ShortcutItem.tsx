@@ -12,6 +12,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement>, Omit<Shortcut, 'id
   isAdd?: boolean,
   isExample?: boolean,
   isReversed?: boolean,
+  disable?: boolean,
 };
 
 const Positive = ({
@@ -20,6 +21,7 @@ const Positive = ({
   name,
   tar,
   isAdd,
+  disable,
 }: Omit<Props, 'isReversed'>)=> {
   const { tar: reversedTar, dispatch } = useStoreField(useDisplayStore, [
     'tar',
@@ -30,13 +32,17 @@ const Positive = ({
     <a
       href={url}
       className={classes.item}
+      data-disable={disable}
       onClick={
         isAdd
         ? ((e)=> { 
           e.preventDefault(); 
           dispatch({ display: 'open', act: 'add' })
         })
-        : undefined
+        : (disable
+          ? (e)=> {e.preventDefault()}
+          : undefined
+        )
       }
     >
       <div

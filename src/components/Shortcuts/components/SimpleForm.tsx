@@ -204,8 +204,11 @@ const SimpleForm = ({
             name={input.name}
             url={input.url}
             iconUrl={input.iconUrl}
+            disable
           />
-          <span>
+          <span
+            className={classes.exampleText}
+          >
             样例
           </span>
         </div>

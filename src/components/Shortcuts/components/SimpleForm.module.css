@@ -154,3 +154,7 @@ input:disabled,
   gap: .8rem;
   align-items: center;
 }
+
+.exampleText {
+  user-select: none;
+}

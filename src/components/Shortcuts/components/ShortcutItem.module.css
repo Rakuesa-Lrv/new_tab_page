@@ -60,6 +60,9 @@
 
   transition: opacity .05s;
 }
+.item[data-disable='true'] {
+  cursor: auto;
+}
 .item:not(.reversed) {
   z-index: 1;
 }
