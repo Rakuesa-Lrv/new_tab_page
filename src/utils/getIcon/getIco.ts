@@ -1,5 +1,3 @@
-
-
 type Option<T> = 
 | { some: T }
 | null;
@@ -7,7 +5,13 @@ type Option<T> =
 const PRIVATE_HOST_RE =
   /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\]|\[f[cd])/i;
 
+export const chromeTabGet = (pageUrl: string, size = 32)=> {
+  const url = new URL(chrome.runtime.getURL('/_favicon/'));
+  url.searchParams.set('pageUrl', pageUrl);
+  url.searchParams.set('size', size.toString());
 
+  return url.toString();
+}
 
 const getIconURL = (url: string): Option<string> => {
   let parsed: URL;

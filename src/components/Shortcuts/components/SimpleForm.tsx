@@ -3,7 +3,8 @@ import classes from './SimpleForm.module.css';
 import useDisplayStore from '@/hooks/useDisplayStore';
 import useStoreField from '@/hooks/useStoreField';
 import ShortcutItem from './ShortcutItem';
-import getIconURL from '@/utils/getIcon/getIco';
+// import getIconURL from '@/utils/getIcon/getIco';
+import { chromeTabGet } from '@/utils/getIcon/getIco';
 import type { Shortcut } from '@/hooks/useConfigStore';
 
 import { useImmer } from 'use-immer';
@@ -51,7 +52,7 @@ const SimpleForm = ({
   ])
 
   const getDefaultName = (url: string)=> (URL.canParse(url)? new URL(url)?.hostname: '');
-  const getDefaultIconUrl = (url: string) => (getIconURL(url)?.some || '');
+  const getDefaultIconUrl = (url: string) => chromeTabGet(url);
 
   console.log(initial);
   
@@ -131,7 +132,7 @@ const SimpleForm = ({
                 onChange={(e)=>{
                   const url = e.currentTarget.value;
                   updateInput((draft)=> {draft.url = url});
-                  updateInput((draft)=> {draft.iconUrl = getIconURL(url)?.some || " " });
+                  updateInput((draft)=> {draft.iconUrl = chromeTabGet(url)});
                   const defaultName = getDefaultName(url);
                   (input.name.trim()==='' 
                   || defaultName.includes(input.name)
