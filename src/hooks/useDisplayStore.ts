@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { combine } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import type { Shortcut } from "./useConfigStore";
+import { configItem } from "@/types/config";
 
 const actC = ['close', 'open', 'swap'] as const;
 type display = typeof actC[number];

@@ -1,0 +1,22 @@
+:root {
+  --imgWidth: 14rem;
+  --shadow: #697c8c7f;
+}
+
+.config {
+  position: relative;
+  width: 65%;
+  display: flex;
+  backdrop-filter: blur(2px);
+  background-color: #d2e6f67f;
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+  border-radius: .6rem;
+  overflow: hidden;
+}
+.configItem {
+  flex-grow: 1;
+}

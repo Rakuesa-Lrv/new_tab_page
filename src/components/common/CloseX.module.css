@@ -10,13 +10,16 @@
   align-items: center;
 
   transition: all .4s;
-  color: #5c86ab;
+  color: #1c3041d2;
+
   position: absolute;
   right: .4rem;
   top: .4rem;
   cursor: pointer;
+
+  z-index: 10;
 }
 .closeIcon:hover {
   transform: rotateZ(90deg);
-  color: #e54529c7;
+  color: #db3315de;
 }

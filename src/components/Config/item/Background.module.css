@@ -1,0 +1,134 @@
+:root {
+  --imgWidth: 14rem;
+  --shadow: #697c8c7f;
+  --focus: #5487b79a;
+  --selected: #0B74C4;
+}
+.bgConfig {
+  position: relative;
+  height: fit-content;
+
+  border-radius: .6rem;
+  padding: 1.4rem 0;
+  color: #1c3041d2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scrollbar-width: .1rem;
+  align-items: center;
+  gap: 2rem;
+}
+
+.bgGrid {
+  width: 100%;
+  max-height: 36rem;
+  height: fit-content;
+  padding: .4rem;
+  overflow-y: scroll;
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--imgWidth), 1fr)
+  );
+  place-items: center;
+  gap: 1.2rem;
+}
+.bgGrid::-webkit-scrollbar {
+  width: .4rem;
+  border-radius: 999rem;
+  overflow: hidden;
+  background-color: #cedfe19a;
+}
+.bgGrid::-webkit-scrollbar-thumb {
+  background-color: #5487b79a;
+  border-radius: 999rem;
+}
+@supports not selector(::-webkit-scrollbar) {
+  .bgGrid {
+    scrollbar-color: #5487b79a #cedfe19a;
+    scrollbar-width: .4rem;
+  }
+}
+
+.bgDisplay {
+  transition: all .15s;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--imgWidth);
+  border-radius: .4rem;
+  overflow: hidden;
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+  background-color: #d2e6f67f;
+  cursor: pointer;
+
+}
+.bgDisplay:hover {
+  transform: scale(1.035);
+}
+.bgDisplay>span {
+  width: 100%;
+  text-align: center;
+  padding: .2rem 0 .3rem;
+}
+.bgDisplay[data-selected='true'] {
+  box-shadow: 
+    -2px 0px 2px var(--selected),
+    2px 0px 2px var(--selected),
+    0px -2px 2px var(--selected),
+    0px 2px 2px var(--selected);
+}
+.bgContain {
+  width: var(--imgWidth);
+  aspect-ratio: 16/9;
+  max-width: fit-content;
+  overflow: hidden;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.bgImg {
+  width: var(--imgWidth);
+}
+
+.upload {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  
+}
+.upload:hover>.uploadIcon {
+  transform: scale(1.1);
+  box-shadow: 
+    -1px 0px 2px var(--focus),
+    1px 0px 2px var(--focus),
+    0px -1px 2px var(--focus),
+    0px 1px 2px var(--focus);
+}
+.upload:hover>.uploadIcon>svg {
+  color: #0B6FB8;
+}
+.uploadIcon {
+  background-color: #d2e6f67f;
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+  width: 2rem;
+  aspect-ratio: 1/.975;
+  border-radius: .4rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .2s;
+}
+
