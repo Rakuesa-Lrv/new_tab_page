@@ -6,7 +6,7 @@ import type { Shortcut } from "./useConfigStore";
 const actC = ['close', 'open', 'swap'] as const;
 type display = typeof actC[number];
 
-const displayItemC = ['add', 'update', 'delete', 'reverse'] as const;
+const displayItemC = ['add', 'update', 'delete', 'reverse', 'config'] as const;
 export type act = typeof displayItemC[number];
 
 type CapDisplayItem = Capitalize<act>;
@@ -23,6 +23,7 @@ const useDisplayStore = create(immer(combine(
     showUpdate: false,
     showDelete: false,
     showReverse: false,
+    showConfig: false,
     tar: '',
   } as State,
   (set)=> ({

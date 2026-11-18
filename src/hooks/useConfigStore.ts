@@ -15,6 +15,7 @@ export interface Shortcut {
 interface State {
   defaultEngine: engine,
   shortCutList: Shortcut[],
+  background: string,
 }
 
 type changeShortcutAction = 
@@ -27,6 +28,7 @@ const useConfigStore = create(persist(immer(combine(
   {
     defaultEngine: 'Google',
     shortCutList: [],
+    background: '',
   } as State,
   (set)=> ({
     setEngine: (engine: engine)=> {
@@ -57,6 +59,11 @@ const useConfigStore = create(persist(immer(combine(
             break;
           }
         }
+      })
+    },
+    setBackground: (key: string)=> {
+      set(draft=> {
+        draft.background = key;
       })
     }
   })

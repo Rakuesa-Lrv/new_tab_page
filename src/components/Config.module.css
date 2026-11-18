@@ -1,0 +1,82 @@
+:root {
+  --imgWidth: 14rem;
+  --shadow: #697c8c7f;
+  --focus: #5487b79a;
+}
+
+.config {
+  position: relative;
+  width: 60%;
+  height: fit-content;
+  background-color: #d2e6f67f;
+  backdrop-filter: blur(2px);
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+  border-radius: .6rem;
+  padding: 1.4rem;
+  color: #1c3041d2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+}
+
+.tempImg {
+  width: var(--imgWidth);
+}
+.bgDisplay {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--imgWidth);
+  gap: .4rem;
+}
+
+.bgGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--imgWidth), 1fr)
+  );
+  place-items: center;
+  /* gap: .8rem; */
+}
+
+.upload {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  
+}
+.upload:hover>.uploadIcon {
+  transform: scale(1.1);
+  box-shadow: 
+    -1px 0px 2px var(--focus),
+    1px 0px 2px var(--focus),
+    0px -1px 2px var(--focus),
+    0px 1px 2px var(--focus);
+}
+.uploadIcon {
+  background-color: #d2e6f67f;
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+  width: 2rem;
+  aspect-ratio: 1/1;
+  border-radius: .4rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .2s;
+
+}

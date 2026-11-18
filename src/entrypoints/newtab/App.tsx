@@ -1,6 +1,6 @@
 import Background from "@/components/Background";
 import Search from "@/components/Search/Search";
-import EditBtn from "@/components/EditBtn";
+import ConfigBtn from "@/components/ConfigBtn";
 import Shortcuts from "@/components/Shortcuts/Shortcuts";
 
 const App = ()=> {
@@ -8,7 +8,7 @@ const App = ()=> {
     <Background>
       <Search />
       <Shortcuts />
-      <EditBtn />
+      <ConfigBtn />
     </Background>
   )
 }

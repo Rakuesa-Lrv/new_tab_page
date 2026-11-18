@@ -29,29 +29,6 @@
   gap: .8rem;
 }
 
-.closeIcon::before {
-  content: '\02A2F';
-}
-.closeIcon {
-  font-size: 1.2rem;
-  width: 1rem;
-  aspect-ratio: 1/1;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  transition: all .4s;
-  color: #5c86ab;
-  position: absolute;
-  right: .3rem;
-  top: .3rem;
-  cursor: pointer;
-}
-.closeIcon:hover {
-  transform: rotateZ(90deg);
-  color: #e54529c7;
-}
-
 .legend {
   font-size: 1.2rem;
   user-select: none;
