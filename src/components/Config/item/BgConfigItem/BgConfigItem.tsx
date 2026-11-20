@@ -1,7 +1,9 @@
 import classes from './BgConfigItem.module.css';
 
 import useStoreField from '@/hooks/useStoreField';
-import { UploadIcon } from '@radix-ui/react-icons';
+// import { UploadIcon } from '@radix-ui/react-icons';
+import uploadIcon from '@/assets/upload.svg';
+
 import { useEffect, useState } from 'react';
 import { getAllBg, addBg, type Bg } from '@/utils/db';
 import useConfigStore from '@/hooks/useConfigStore';
@@ -45,36 +47,44 @@ const BgConfigItem = ({
         className={`${classes.bgConfig} ${className}`}
       >
         
-        <label
-          className={classes.upload}
-        >
-          <span>自定义背景:</span>
-          <div
-            className={classes.uploadIcon}
-          >
-            <UploadIcon />
-          </div>
-          <input 
-            type='file' 
-            name='background' 
-            className='sr-only'
-            accept='image/png, image/jpeg, image/bmp' 
-            onChange={(e)=> {
-              const curr = e.currentTarget;
-              const file = curr.files?.[0];
-              if(!file) {
-                setErr('获取图像失败');
-                return;
-              };
-              dispatch({ act: 'crop', display: 'open', cropImg: { url: URL.createObjectURL(file), name: file.name  }});
-            }}
-          />
-        </label>
+
 
         <div
           className={classes.bgGrid}
-        >{
-          bgList.map(item=> (
+        >
+          <label>
+            <div
+              className={`${classes.bgDisplay} ${classes.uploadDisplay}`}
+            >
+              <div
+                className={classes.bgContain}
+              >
+                <img 
+                  className={classes.bgImg}
+                  src={uploadIcon} 
+                />
+              </div>
+              <span>
+                上传自定义背景
+              </span>
+            </div>
+            <input 
+              type='file' 
+              name='background' 
+              className='sr-only'
+              accept='image/png, image/jpeg, image/bmp' 
+              onChange={(e)=> {
+                const curr = e.currentTarget;
+                const file = curr.files?.[0];
+                if(!file) {
+                  setErr('获取图像失败');
+                  return;
+                };
+                dispatch({ act: 'crop', display: 'open', cropImg: { url: URL.createObjectURL(file), name: file.name  }});
+              }}
+            />
+          </label>
+          {bgList.map(item=> (
             <div
               className={classes.bgDisplay}
               key={item.id}
@@ -95,8 +105,8 @@ const BgConfigItem = ({
               </div>
               <span>{item.name}</span>
             </div>
-          ))
-        }</div>
+          ))}
+        </div>
       </div>
     </>
 
