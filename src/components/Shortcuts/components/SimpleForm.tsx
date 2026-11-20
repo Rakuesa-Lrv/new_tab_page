@@ -33,7 +33,7 @@ const normalizeUrl = (url: string):string=> {
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  act: act,
+  act: Extract<act, 'add' | 'update' | 'delete'>,
   initial?: Shortcut,
   title: string,
 }

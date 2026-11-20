@@ -6,9 +6,8 @@ import CloseX from '../common/CloseX';
 import useStoreField from '@/hooks/useStoreField';
 import useDisplayStore from '@/hooks/useDisplayStore';
 
-import ConfigItemList from './ConfigItemList';
 import { configItem } from '@/types/config';
-import Background from './item/background';
+import BgConfigItem from './item/BgConfigItem/BgConfigItem';
 import { useState } from 'react';
 
 const Config = ()=> {
@@ -30,8 +29,24 @@ const Config = ()=> {
             dispatch({ act: 'config', display: 'close' })
           }}
         />
-        <ConfigItemList selected={config} />
-        {config==='background' && <Background className={classes.configItem} />}
+        <div
+          className={classes.configList}
+        >
+          {configItem.map(({item, name, icon})=> (
+            <div
+              key={item}
+              className={classes.configOption}
+              data-selected={config===item}
+              onClick={()=> {
+                setConfigItem(item);
+              }}
+            >
+              <img src={icon} alt={name} />
+              <span>{name}</span>
+            </div>
+          ))}
+        </div>
+        {config==='background' && <BgConfigItem className={classes.configItem} />}
 
       </div>
     </Backdrop>

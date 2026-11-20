@@ -1,6 +1,7 @@
 :root {
   --imgWidth: 14rem;
   --shadow: #697c8c7f;
+  --focus: #5487b79a;
 }
 
 .config {
@@ -19,4 +20,40 @@
 }
 .configItem {
   flex-grow: 1;
+}
+
+.configList {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+
+  font-size: 1rem;
+  padding: .7rem 0 .7rem .6rem;
+  gap: .6rem;
+}
+.configOption {
+  padding: .5rem .6rem .5rem .7rem;
+  border-radius: .6rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+}
+.configOption:hover {
+  box-shadow: 
+    -2px 0px 2px var(--shadow),
+    2px 0px 2px var(--shadow),
+    0px -2px 2px var(--shadow),
+    0px 2px 2px var(--shadow);
+  background-color: #d2e6f67f;
+}
+.configOption[data-selected='true'] {
+  box-shadow: 
+    -1px 0px 2px var(--focus),
+    1px 0px 2px var(--focus),
+    0px -1px 2px var(--focus),
+    0px 1px 2px var(--focus);
+  background-color: #cadfeec0;
 }
