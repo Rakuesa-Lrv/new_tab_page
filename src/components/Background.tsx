@@ -5,7 +5,7 @@ import defbg from '@/assets/EV_A07.png'
 import useDisplayStore from '@/hooks/useDisplayStore';
 import useConfigStore from '@/hooks/useConfigStore';
 import { getAllBg, getBg } from '@/utils/db';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -34,8 +34,9 @@ const Background = ({
     <div
       className={classes.bg}
       style={{
-        backgroundImage: `url(${bg? bg: defbg})`
-      }}
+        // backgroundImage: `url(${bg? bg: defbg})`
+        '--bgi': `url(${bg? bg: defbg})`,
+      }as CSSProperties}
       onClick={(e)=> {
         e.stopPropagation();
         e.currentTarget===e.target && (dispatch({ display: 'close', act: 'reverse' }));

@@ -47,7 +47,13 @@ const BgConfigItem = ({
         className={`${classes.bgConfig} ${className}`}
       >
         
-
+        <div
+          className={classes.current}
+        >
+          <p>背景图像编辑</p>
+          <div className={classes.separator} ></div>
+          <p>历史背景</p>
+        </div>
 
         <div
           className={classes.bgGrid}
